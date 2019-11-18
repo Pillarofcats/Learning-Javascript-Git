@@ -1,0 +1,90 @@
+__LOCAL__
+
+//Check Git Software Version
+  git --version
+
+//Config Git Username/Email etc
+  git config --global user.name "Jacob"
+  git config --global user.email "******@gmail.com"
+
+//Check Git Configuration Values
+  git config --list
+
+//Get Help with Git Syntax
+  git help <verb>
+  git <verb> --help
+
+//Initialize a Repository from Existing File [MUST BE IN FILE DIRECTORY OF RESPOSITORY]
+  cd C:\Users\Pillarofcats\Desktop\git
+  git init
+
+//REMOVE a Repository from from Existing File [MUST BE IN FILE DIRECTORY OF RESPOSITORY]
+  rm .git
+
+//Before Commiting Files to Master
+  git status
+
+//CREATE a .gitignore files to Ignore Specified File Types before Commiting to Master
+  touch .gitignore
+  */In the .gitignore file input .FILENAME || *.FILENAME_EXTENSION to be ignored*/
+  .FILENAME
+  *.FILENAME_EXTENSION
+
+
+[GIT DIRECTORY]	    --->     [STAGING DIRECTORY]    --->     [REPOSITORY]
+
+
+//ADD Files to STAGING DIRECTORY
+  /*ADD all files to staging other than .gitignore files*/
+    git add A-
+  /*ADD individual files to staging directory*/
+    git add FILENAME.FILE_EXTENSION  (file.txt)
+
+//REMOVE files from STAGING DIRECTORY
+  /*REMOVE all files from staging directory than .gitignore files*/
+    git reset
+  /*REMOVE individual files from staging directory*/
+    git reset FILENAME.FILE_EXTENSION  (file.txt)
+
+//COMMIT all files in STAGING DIRECTORY to RESPOSITORY
+  git commit -m "DETAILED MESSAGE EXPLAINING CHANGES MADE TO CODE"
+
+
+__REMOTE__
+
+//Clone a REMOTE repository
+  git clone <URL> .       (. means in curret file directory in git bash)
+
+//View information about REMOTE repositories
+  git remote -v
+
+//View all branches in LOCAL/REMOTE repositories
+  git branch -a
+
+//View changes made of LOCAL & REMOTE files
+  git diff
+
+//Vies status of file to be committed to REMOTE repositories
+  git status
+
+//COMMIT CHANGES OF FILE TO REMOTE REPOSITORIES
+
+  //ADD Files to STAGING DIRECTORY
+    /*ADD all files to staging other than .gitignore files*/
+      git add A-
+    /*ADD individual files to staging directory*/
+      git add FILENAME.FILE_EXTENSION  (file.txt)
+ 
+  //REMOVE files from STAGING DIRECTORY
+    /*REMOVE all files from staging directory than .gitignore files*/
+      git reset
+    /*REMOVE individual files from staging directory*/
+      git reset FILENAME.FILE_EXTENSION  (file.txt)
+
+  //COMMIT all files in STAGING DIRECTORY to RESPOSITORY
+    git commit -m "DETAILED MESSAGE EXPLAINING CHANGES MADE TO CODE"
+
+//(PULL/PUSH) files (FROM/TO) (REMOTE/LOCAL) Repository
+  git push origin master	(push files to remote repository)
+  git pull origin master        (pull files from remote respository)
+  
