@@ -3,6 +3,8 @@ document.getElementById("login_b").onclick = login =() => {
     let username = prompt("Username.");
     let password = prompt("Password.");
     console.log("Username: " + username + "\nPassword: " + password);
+    document.getElementById("login_output").innerHTML += "Username: " + username + "<br>";
+    document.getElementById("login_output").innerHTML += "Password: " + password + "<br>";
 }
 
 //Confirm purchase button output function ex.
@@ -19,6 +21,13 @@ document.getElementById("convert_b").onclick = convert =() => {
     console.log("Binary   :", convertInput.toString(2));
     console.log("Octal    :", convertInput.toString(8));
     console.log("Hex      :", convertInput.toString(16));
+
+    document.getElementById("convert_output").innerHTML += "Decimal  : " + convertInput + "<br>";
+    document.getElementById("convert_output").innerHTML += "Binary   : " + convertInput.toString(2) + "<br>";;
+    document.getElementById("convert_output").innerHTML += "Octal    : " + convertInput.toString(8) + "<br>";
+    document.getElementById("convert_output").innerHTML += "Hex      : " + convertInput.toString(16) + "<br>";
+
+
 }
 
 //Password loop check function ex.
@@ -116,6 +125,55 @@ document.getElementById("multi_array_b").onclick = multi_array = () => {
         document.getElementById("multi_array_print").innerHTML += " ]";
     });
     document.getElementById("multi_array_print").innerHTML += " ]";
+}
+
+//Call function within another function and store a function array example
+let f_1 = function (x) {
+    return x*x;
+}
+
+let f_2 = function (x,y) {
+    return x*y;
+}
+
+let f_3 = function (x,y,z) {
+    return x*y*z;
+}
+
+document.getElementById("func_array_b").onclick = func_array = () => {
+
+    let num1 = f_1(2);
+    document.getElementById("func_array_output").innerHTML += "2 * 2 = " + num1 + "<br>";
+    let num2 = f_2(2,3);
+    document.getElementById("func_array_output").innerHTML += "2 * 3 = " + num2 + "<br>";
+    let num3 = f_3(2,3,4);
+    document.getElementById("func_array_output").innerHTML += "2 * 3 * 4 = " + num3 + "<br>";
+
+    //Store functions in an array and print
+    let f_array = [f_1, f_2, f_3];
+    document.getElementById("func_array_output").innerHTML += "Function element [0]: " + f_array[0](2) + "<br>";
+    document.getElementById("func_array_output").innerHTML += "Function element [1]: " + f_array[1](2,3) + "<br>";
+    document.getElementById("func_array_output").innerHTML += "Function element [2]: " + f_array[2](2,3,4) + "<br>";
+    
+    console.log("Function element [0]: ", f_array[0](2));
+    console.log("Function element [1]: ", f_array[1](2,3));
+    console.log("Function element [2]: ", f_array[2](2,3,4));
+}
+
+//Print a callback function
+document.getElementById("callback_b").onclick = callback_func = () => {
+    let inner_func = f_1;
+
+    function callback_func (x) {
+        let i_f = x(5);
+        document.getElementById("callback_output").innerHTML += "Inner function value: " + i_f + "<br>";
+        console.log("Inner function value:", i_f);
+        return i_f*2;
+    }
+    //Callback function taking another function with a argument
+    let cbf = callback_func(inner_func);
+    document.getElementById("callback_output").innerHTML += "Callback function value: " + cbf + "<br>";
+    console.log("Callback function value:", cbf);
 }
 
 //Console log ex.
