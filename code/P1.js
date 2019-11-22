@@ -26,8 +26,6 @@ document.getElementById("convert_b").onclick = convert =() => {
     document.getElementById("convert_output").innerHTML += "Binary   : " + convertInput.toString(2) + "<br>";;
     document.getElementById("convert_output").innerHTML += "Octal    : " + convertInput.toString(8) + "<br>";
     document.getElementById("convert_output").innerHTML += "Hex      : " + convertInput.toString(16) + "<br>";
-
-
 }
 
 //Password loop check function ex.
@@ -174,6 +172,112 @@ document.getElementById("callback_b").onclick = callback_func = () => {
     let cbf = callback_func(inner_func);
     document.getElementById("callback_output").innerHTML += "Callback function value: " + cbf + "<br>";
     console.log("Callback function value:", cbf);
+}
+
+//Memoization function ex  (memoization)
+document.getElementById("memoize_b").onclick = memoize = () => {
+  
+    prism_vol.cache = {};
+  
+    function prism_vol (l,w,h) {
+      let key_vol = l + " * " + w + " * " + h;
+      
+      if(key_vol in prism_vol.cache) {
+        document.getElementById("memoize_output").innerHTML += " exists already: " + key_vol + "<br>";
+      }
+  
+      else{
+        let volume = l*w*h;
+        prism_vol.cache[key_vol] = volume;
+        document.getElementById("memoize_output").innerHTML += key_vol + " = " + volume + "<br>";
+      }
+    }
+  
+    prism_vol(2,3,4);
+    prism_vol(1,2,3);
+    prism_vol(1,2,3);
+    prism_vol(2,4,6);
+    prism_vol(1,3,5);
+    prism_vol(2,4,6);
+}
+
+//Call and Apply methods for CHANGING this object in a function equal to the argument passed invoking the call/apply method
+document.getElementById("call_app_b").onclick = call_app = () => {
+
+    function call_this (arg_1, arg_2) {
+        document.getElementById("call_app_output").innerHTML += "<br>CALL METHOD:<br>";
+        document.getElementById("call_app_output").innerHTML += "Arg_1 = " + arg_1 + "<br>" + "Arg_2 = " + arg_2 + "<br>" + "this object = " + this + "<br>";
+    }
+
+    function apply_this (arg_1, arg_2) {
+        document.getElementById("call_app_output").innerHTML += "<br>APPLY METHOD:<br>";
+        document.getElementById("call_app_output").innerHTML += "Arg_1 = " + arg_1 + "<br>" + "Arg_2 = " + arg_2 + "<br>" + "this object = " + this + "<br>";
+    }
+    //Value of this before using call/apply methods
+    call_this(1,2);
+    apply_this(3,4);
+
+    //Call method takes a NORMAL ARGUMENT, [THIS MUST BE FIRST ARGUMENT]
+    call_this.call("this object using call.",1,2);
+    //Apply method takes an ARRAY AS AN ARGUMENT, [THIS MUST BE FIRST ARGUMENT], [Each element in the array counts for 1 argument when function is invoked]
+    apply_this.apply("this object using apply.",[3,4]);
+}
+
+//Create a Constructor function to make new animal objects with their own properties and store them in an object array
+var animal_array = [];
+
+document.getElementById("construct_b").onclick = construct = () => {
+
+    //Constructor
+    function Animal (name, type, can_pet) {
+        //this refers to new object to be created
+        this.name = name;
+        this.type = type;
+        this.can_pet = can_pet;
+        document.getElementById("construct_output").innerHTML += "Made a " + this.type + " named " + this.name + ", but will you pet it? " + this.can_pet + "!<br>";
+    }
+
+    //Factory Function
+    function new_animal (name, type, can_pet) {
+        let animal = {
+            name: name,
+            type: type,
+            can_pet: can_pet
+        };
+        document.getElementById("construct_output").innerHTML += "Made a " + type + " named " + name + ", but will you pet it? " + can_pet + "!<br>";
+        return animal;
+    }
+
+    let a_name = prompt("What is the animal's name? ");
+    let a_type = prompt("What type of animal is this? ");
+    let a_cp = prompt("Would you pet this animal? ");
+    let pick;
+    let make_animal;
+
+    //Select object creation method Factory Function OR Constructor
+    do {
+        pick = prompt("1: Factory Function\n2: Constructor");
+    } while (!(pick === "1" || pick === "2"));
+
+    if (pick === "1") {
+        //Make an animal using the Factory function
+        make_animal = new_animal(a_name, a_type, a_cp);
+    }
+    else{
+        //Making an animal using the Constructor
+        make_animal = new Animal(a_name, a_type, a_cp);
+    }
+
+    animal_array.push(make_animal);
+
+    let json_animal_str = null;
+    document.getElementById("construct_output").innerHTML += "We have made " + animal_array.length + " animal(s): "
+
+    for (let z = 0; z < animal_array.length; z++) {
+        json_animal_str = JSON.stringify(animal_array[z]);
+        document.getElementById("construct_output").innerHTML += "[" + json_animal_str + "] ";
+    }
+    document.getElementById("construct_output").innerHTML += "<br><br>";
 }
 
 //Console log ex.
