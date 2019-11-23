@@ -36,7 +36,7 @@ __LOCAL__
 
 //ADD Files to STAGING DIRECTORY
   /*ADD all files to staging other than .gitignore files*/
-    git add A-
+    git add -A
   /*ADD individual files to staging directory*/
     git add FILENAME.FILE_EXTENSION  (file.txt)
 
