@@ -234,11 +234,16 @@ document.getElementById("construct_b").onclick = construct = () => {
         this.name = name;
         this.type = type;
         this.can_pet = can_pet;
+        this.output_animal(); //Uses inheritance from Parent prototype, Animal.prototype.output_animal
+    }
+    //Parent inheritance of constructor Animal method
+    Animal.prototype.output_animal = function() {
         document.getElementById("construct_output").innerHTML += "Made a " + this.type + " named " + this.name + ", but will you pet it? " + this.can_pet + "!<br>";
     }
 
     //Factory Function
     function new_animal (name, type, can_pet) {
+        //Object literal
         let animal = {
             name: name,
             type: type,
@@ -278,6 +283,40 @@ document.getElementById("construct_b").onclick = construct = () => {
         document.getElementById("construct_output").innerHTML += "[" + json_animal_str + "] ";
     }
     document.getElementById("construct_output").innerHTML += "<br><br>";
+}
+
+//Change prototype inheritance of objects
+document.getElementById("inherit_obj_b").onclick = inherit = () => {
+   
+    //object literal
+    let teacher = {
+        species: "human",
+        classroom: 101,
+    };
+
+    //object literal
+    let student = {
+       gpa: 3.0,
+       classes: ["math", "science","english"],
+   };
+
+   //Student object literal inherits ALL of the properties of the teacher object literal
+   Object.setPrototypeOf(student, teacher);
+   document.getElementById("inherit_obj_output").innerHTML += "Changed STUDENT object literal to receive TEACHER object literal PROPERTIES using PROTOTYPE INHERITANCE<br><br>";
+   
+   //Shows student inherited properties of teacher
+   console.log("Teacher: ",teacher,"\nStudent: ",student,"\n");
+   console.log("Student Species: ",student.species + "\nstudentclassroom: ",student.classroom);
+   
+   //Convert javascript objects to strings that can be displayed through .innerHTML
+   let t = JSON.stringify(teacher);
+   let s = JSON.stringify(student);
+   let tp = JSON.stringify(teacher.__proto__);
+   let sp = JSON.stringify(student.__proto__);
+
+   //Print teacher and student objects then teacher and student prototype objects from inheritance
+   document.getElementById("inherit_obj_output").innerHTML += "Teacher object - proto : " + t + "<br>Teacher object + proto: " + t + " " + tp + "<br>";
+   document.getElementById("inherit_obj_output").innerHTML += "<br>Student object - proto : " + s + "<br>Student object + proto: " + s + " " + sp + "<br>";
 }
 
 //Console log ex.
